@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('last_name');
             $table->string('title')->default('Professor');
-            $table->string('katedra');
+            $table->string('department');
+            $table->string('faculty')->default('FON');
         });
     }
 
