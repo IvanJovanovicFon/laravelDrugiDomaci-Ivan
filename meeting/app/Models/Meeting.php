@@ -16,6 +16,8 @@ class Meeting extends Model
         'professor_id',
         'user_id'
     ];
+
+    public $timestamps = false;
     public function professor()
     {
         return $this->belongsTo(Professor::class);

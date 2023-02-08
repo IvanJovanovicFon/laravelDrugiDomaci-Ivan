@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('subject')->default('Konsultacije');
             $table->string('room');
-            $table->date('date')->default(now());
-           $table->string('professor_id');
+            $table->date('date');
+            $table->foreignId('professor_id');
             $table->foreignId('user_id');
             
             
@@ -36,6 +36,7 @@ return new class extends Migration
     {
         Schema::table('meetings', function (Blueprint $table) {
         $table->dropForeign("user_id");
+        $table->dropForeign("professor_id");
     });
 }
 };
