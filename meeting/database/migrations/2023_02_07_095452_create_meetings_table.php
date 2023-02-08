@@ -15,13 +15,11 @@ return new class extends Migration
     {
         Schema::create('meetings', function (Blueprint $table) {
             $table->id();
-            $table->string('faculty')->default('FON');
             $table->string('subject')->default('Konsultacije');
             $table->string('room');
             $table->date('date')->default(now());
-           
            $table->string('professor_id');
-            $table->string('user_id');
+            $table->foreignId('user_id');
             
             
            
@@ -36,6 +34,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('meetings');
-    }
+        Schema::table('meetings', function (Blueprint $table) {
+        $table->dropForeign("user_id");
+    });
+}
 };

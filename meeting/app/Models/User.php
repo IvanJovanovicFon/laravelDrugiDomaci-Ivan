@@ -19,9 +19,14 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
-        'password',
+        'last_name',
+        'index_number',
+        'year_of_study',
     ];
+
+    public function meetings(){
+        return $this->hasMany(Meeting::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

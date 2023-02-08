@@ -16,5 +16,13 @@ class Meeting extends Model
         'professor_id',
         'user_id'
     ];
+    public function professor()
+    {
+        return $this->belongsTo(Professor::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 
 }
