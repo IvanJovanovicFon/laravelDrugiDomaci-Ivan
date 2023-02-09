@@ -17,7 +17,7 @@ class ProfessorFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->firstName(),
+            'first_name' => fake()->firstName(),
             'last_name' =>fake()->lastName(),
             'title'=>$this->faker->word(),
             'department'=>$this->faker->word(),

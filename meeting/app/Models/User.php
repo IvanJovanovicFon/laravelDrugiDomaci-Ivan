@@ -22,6 +22,7 @@ class User extends Authenticatable
         'last_name',
         'index_number',
         'year_of_study',
+        'faculty',
     ];
 
     public function meetings(){

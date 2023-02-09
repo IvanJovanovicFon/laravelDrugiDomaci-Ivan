@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Http\Resources;
+
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class UserResource extends JsonResource
+{
+    /**
+     * Transform the resource into an array.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     */
+    public static $wrap = 'user';
+    public function toArray($request)
+    {
+        return [
+            'first_name' =>$this->resource->first_name,
+            'last_name' =>$this->resource->last_name,
+            'email'=>$this->resource->email,
+            'faculty'=>$this->resource->faculty,
+            'index_number'=>$this->resource->index_number,
+            'year_of_study'=>$this->resource->year_of_study,  
+
+        ];
+    }
+}
