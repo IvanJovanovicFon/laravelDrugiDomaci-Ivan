@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\UserCollection;
-use App\Http\Resources\UserResource;
-use App\Models\User;
+use App\Http\Resources\ProfessorCollection;
+use App\Http\Resources\ProfessorResource;
+use App\Models\Professor;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class ProfessorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return UserResource::collection($users);
+        $professors =Professor::all();
+        return ProfessorResource::collection($professors);
     }
 
     /**
@@ -44,21 +44,22 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Professor  $professor
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Professor $professor)
     {
-      return new UserResource($user);
+
+        return new ProfessorResource($professor);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Professor  $professor
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Professor $professor)
     {
         //
     }
@@ -67,10 +68,10 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Professor  $professor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Professor $professor)
     {
         //
     }
@@ -78,10 +79,10 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Professor  $professor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Professor $professor)
     {
         //
     }
