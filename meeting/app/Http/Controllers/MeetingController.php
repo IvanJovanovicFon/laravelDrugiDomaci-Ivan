@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Resources\MeetingCollection;
 use App\Http\Resources\MeetingResource;
 use App\Models\Meeting;
+use Dotenv\Validator as DotenvValidator;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Validator as ValidationValidator;
 
 class MeetingController extends Controller
 {
@@ -38,8 +42,30 @@ class MeetingController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+    //     $validator = Validator::make($request->all(),[
+    //         'department' => 'required|string|max:255',
+    //         'room' => 'required|max:11',
+    //         'date' => 'required',
+    //         //'user_id' => 'required',
+    //         'professor_id' => 'required',
+    //         'facuty'=>'required',
+    //     ]);
+
+    //     if($validator->fails()){
+    //         return response()->json($validator->errors());
+    //     }
+
+    //     $appointment = Meeting::create([
+    //         'department' => $request->department,
+    //         'room' => $request->room,
+    //         'date' => $request->date,
+    //         'user_id' => Auth::user()->id,
+    //         'doctor_id' => $request->doctor_id,
+    //     ]);
+
+    //     return response()->json(['Meeting created successfully', new MeetingResource($appointment)]);
+    // 
+}
 
     /**
      * Display the specified resource.

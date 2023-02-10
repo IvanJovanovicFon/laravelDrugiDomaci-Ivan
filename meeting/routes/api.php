@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\ProfessorMeetingController;
@@ -37,3 +38,7 @@ Route::get('/users/{id}/meetings', [UserMeetingController::class, 'index'])
 Route::get('/professors/{id}/meetings', [ProfessorMeetingController::class, 'index'])
 ->name('professors.meetings.index');
 //Route::get('professors.meetings', ProfessorMeetingController::class)->only(['index']);
+
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
