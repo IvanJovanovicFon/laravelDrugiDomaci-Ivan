@@ -30,15 +30,26 @@ Route::resource('users', UserController::class);
 Route::resource('professors', ProfessorController::class);
 
 
-
-// Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
-// Route::get('/users', [UserController::class, 'index'])->name('users.index');
+//ugnjezdeni resursi
 Route::get('/users/{id}/meetings', [UserMeetingController::class, 'index'])
 ->name('users.meetings.index');
 Route::get('/professors/{id}/meetings', [ProfessorMeetingController::class, 'index'])
 ->name('professors.meetings.index');
-//Route::get('professors.meetings', ProfessorMeetingController::class)->only(['index']);
+
 
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+
+//grupne rute
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/profile', function(Request $request) {
+        return auth()->user();
+    });
+    //parcijalne rute
+    Route::resource('meetings', MeetingController::class)->only(['update','store','destroy']);
+
+    // API route for logout user
+    Route::post('/logout', [AuthController::class, 'logout']);
+});

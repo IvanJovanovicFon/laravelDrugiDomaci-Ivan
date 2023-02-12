@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('index_number');
             $table->integer('year_of_study');
+            $table->string('greska')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

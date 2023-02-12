@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Resources\MeetingCollection;
 use App\Http\Resources\MeetingResource;
 use App\Models\Meeting;
-use Dotenv\Validator as DotenvValidator;
-use Illuminate\Contracts\Validation\Validator;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Validator as ValidationValidator;
+use Illuminate\Support\Facades\Validator;
+
 
 class MeetingController extends Controller
 {
@@ -42,29 +42,29 @@ class MeetingController extends Controller
      */
     public function store(Request $request)
     {
-    //     $validator = Validator::make($request->all(),[
-    //         'department' => 'required|string|max:255',
-    //         'room' => 'required|max:11',
-    //         'date' => 'required',
-    //         //'user_id' => 'required',
-    //         'professor_id' => 'required',
-    //         'facuty'=>'required',
-    //     ]);
+        $validator = Validator::make($request->all(),[
+            'subject' => 'required|string|max:255',
+            'room' => 'required|max:6',
+            'date' => 'required',
+            'user_id' => 'required',
+            'professor_id' => 'required',
 
-    //     if($validator->fails()){
-    //         return response()->json($validator->errors());
-    //     }
+        ]);
 
-    //     $appointment = Meeting::create([
-    //         'department' => $request->department,
-    //         'room' => $request->room,
-    //         'date' => $request->date,
-    //         'user_id' => Auth::user()->id,
-    //         'doctor_id' => $request->doctor_id,
-    //     ]);
+        if($validator->fails()){
+            return response()->json($validator->errors());
+        }
 
-    //     return response()->json(['Meeting created successfully', new MeetingResource($appointment)]);
-    // 
+        $meeting = Meeting::create([
+            'subject' => $request->subject,
+            'room' => $request->room,
+            'date' => $request->date,
+            'user_id' => Auth::user()->id,
+            'professor_id' => $request->professor_id,
+        ]);
+
+        return response()->json(['Meeting created successfully', new MeetingResource($meeting)]);
+    
 }
 
     /**
@@ -97,8 +97,39 @@ class MeetingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Meeting $meeting)
-    {
-        //
+    {           
+        // $validator = Validator::make($request->all(),[
+        //     'subject' => 'required|string|max:255',
+        //     'room' => 'required|string|max:11',
+        //     'date' => 'required',
+        //     'user_id' => 'required|integer',
+        //     'doctor_id' => 'required|integer',
+        // ]);
+
+        // if($validator->fails()){
+        //     return response()->json($validator->errors());
+        // }
+
+        // $meeting->subject = $request->subject;
+        // $meeting->room = $request->room;
+        // $meeting->date = $request->date;
+        // $meeting->user_id = $request->user_id;
+        // $meeting->professor_id = $request->professor_id;
+
+        // $meeting->save();
+
+        if(!is_null($request->subject)){
+            $meeting->subject = $request->subject;
+        }      
+        if(!is_null($request->room)) 
+        $meeting->room = $request->room;
+        if(!is_null($request->date)) 
+        $meeting->date = $request->date;
+        if(!is_null($request->professor_id)) 
+        $meeting->professor_id = $request->professor_id;
+        $meeting->update();
+        return response()->json(['Meeting updated successfully', new MeetingResource($meeting)]);
+    
     }
 
     /**
@@ -109,6 +140,7 @@ class MeetingController extends Controller
      */
     public function destroy(Meeting $meeting)
     {
-        //
+        $meeting->delete();
+        return response()->json('Meeting deleted successfully');
     }
 }

@@ -21,10 +21,7 @@ return new class extends Migration
             $table->foreignId('professor_id');
             $table->foreignId('user_id');
             
-            
-           
-
-        });
+            });
     }
 
     /**

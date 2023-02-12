@@ -6,6 +6,8 @@ use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -38,7 +40,32 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'first_name' => 'required|string|max:255',
+            'email' => 'required|string',
+            'password' => 'required|string|min:8',
+            'last_name' => 'required|max:255',
+            'faculty' => 'required|string',
+            'year_of_study' => 'required|integer',
+            'index_number' => 'required|string',
+
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors());
+        }
+
+        $user = User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'faculty'=>$request->faculty,
+            'email'=>$request->email,
+            'password' => Hash::make($request->password),
+            'year_of_study'=>$request->year_of_study,
+            'index_number'=>$request->index_number,
+        ]);
+
+        return response()->json(['User created successfully', new UserResource($user)]);
     }
 
     /**
@@ -72,7 +99,17 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $user->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'faculty'=>$request->faculty,
+            'email'=>$request->email,
+            'password' => Hash::make($request->password),
+            'year_of_study'=>$request->year_of_study,
+            'index_number'=>$request->index_number,
+        ]);
+
+        return new UserResource($user);
     }
 
     /**
@@ -83,6 +120,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return response()->json('User deleted successfully.');
     }
 }
