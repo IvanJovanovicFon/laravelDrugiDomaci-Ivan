@@ -29,18 +29,14 @@ Route::resource('meetings', MeetingController::class);
 Route::resource('users', UserController::class);
 Route::resource('professors', ProfessorController::class);
 
-
 //ugnjezdeni resursi
 Route::get('/users/{id}/meetings', [UserMeetingController::class, 'index'])
 ->name('users.meetings.index');
 Route::get('/professors/{id}/meetings', [ProfessorMeetingController::class, 'index'])
 ->name('professors.meetings.index');
 
-
-
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-
 
 //grupne rute
 Route::group(['middleware' => ['auth:sanctum']], function () {
