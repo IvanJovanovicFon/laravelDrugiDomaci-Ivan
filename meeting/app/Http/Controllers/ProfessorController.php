@@ -20,7 +20,7 @@ class ProfessorController extends Controller
     public function index()
     {
         $professors =Professor::all();
-        return ProfessorResource::collection($professors);
+        return new ProfessorResource($professors);
     }
 
     /**

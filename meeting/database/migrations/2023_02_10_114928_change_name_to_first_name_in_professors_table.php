@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Validation\Rules\Exists;
 
 return new class extends Migration
 {
@@ -13,9 +14,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('professors', function (Blueprint $table) {
-            $table->renameColumn('name', 'first_name');
-        });
+        // Schema::table('professors', function (Blueprint $table) {
+        //     $table->renameColumn('name', 'first_name');
+        // });
     }
 
     /**
